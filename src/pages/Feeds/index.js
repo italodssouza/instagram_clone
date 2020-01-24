@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import Routes from './routes';
-class App extends Component {
+import Feed from '../../components/feed';
+
+class Feeds extends Component {
   render() {
     return (
       <div className="App">
-        <Routes/>
+        <Feed/>
       </div>
     );
   }
 }
 
-export default App;
+export default Feeds;
