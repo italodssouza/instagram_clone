@@ -6,8 +6,10 @@ import Logins from './pages/Login';
 const Routes = () => {
     return (
         <BrowserRouter>
-            <Route exact path="/" component={Feeds}/>
-            <Route path="/login" component={Logins}/>
+            <Switch>
+                <Route exact path="/" component={Feeds}/>
+                <Route path="/login" component={Logins}/>
+            </Switch>
         </BrowserRouter>
     );
 }

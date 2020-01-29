@@ -1,36 +1,67 @@
 import React, {Component} from 'react';
-
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
+import Grid from '@material-ui/core/Grid';
+ 
 class Login extends Component {
-    constructor(props){
-        super(props);
 
+    constructor(props) {
+        super(props);
+        
         this.state = {
             email: '',
             password: ''
         }
     }
-
-    login = () => {
-        (this.state.email === "italodssouza@gmail.com" && this.state.password === "1234") ? alert('Hell yes'): alert('Kinda not');
+ 
+    handleChange = (event) => {
+        const data  = this.state;
+        data[event.target.name] = event.target.value;
+        this.setState({ data });
     }
-
-    changeEmail = (e) => {
-        let emailValue = e.target.value;
-        this.setState({email: emailValue})
+ 
+    handleSubmit = () => {
+        // your submit logic
     }
+ 
+    render() {
+        const { email, password } = this.state;
 
-    changePassword = (e) => {
-        let passwordValue = e.target.value;
-        this.setState({password: passwordValue})
-    }
-
-    render(){
-        return(
-            <div>
-                <input type="email" name="email" id="email" onChange={this.changeEmail} value={this.state.email}/>
-                <input type="password" name="password"  onChange={this.changePassword} value={this.state.password}/>
-                <button onClick={this.login}>Entrar</button>
-            </div>
+        return (
+            <Card variant="outlined">
+                <h1 style={{fontFamily: "Comic Sans, cursive"}}>Instagram</h1>
+                <ValidatorForm
+                    ref="form"
+                    onSubmit={this.handleSubmit}
+                    onError={errors => console.log(errors)}
+                >
+                    <CardContent>
+                        <div><TextValidator
+                            label="Email"
+                            onChange={this.handleChange}
+                            name="email"
+                            value={email}
+                            validators={['required', 'isEmail']}
+                            errorMessages={['This field is required', 'E-mail is not valid']}
+                        /></div>
+                        <TextValidator
+                            label="Password"
+                            onChange={this.handleChange}
+                            name="password"
+                            type="password"
+                            value={password}
+                            validators={['minStringLength:8', 'maxStringLength:12', 'required']}
+                            errorMessages={['Must be at least 8 numbers', 'Must be at max 12 numbers' ,'This field is required']}
+                        />
+                    </CardContent>
+                    <CardActions>
+                        <Button color="primary" variant="contained" type="submit">Login</Button>
+                    </CardActions>
+                </ValidatorForm>
+            </Card>
         );
     }
 }
