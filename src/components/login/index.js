@@ -24,7 +24,7 @@ class Login extends Component {
     }
  
     handleSubmit = () => {
-        // your submit logic
+        // your submit logic just a test
     }
  
     render() {
